@@ -47,12 +47,11 @@ public class PaymentServiceImplTest {
 
 	}
 
-	@Test//(expected = ValidatorException.class)
-	public void processPaymentTest() throws Exception  {
+	@Test // (expected = ValidatorException.class)
+	public void processPaymentTest() throws Exception {
 
 		// given
 
-		// when
 		Mockito.doAnswer(new Answer<Void>() {
 
 			public Void answer(InvocationOnMock invocation) {
@@ -62,17 +61,16 @@ public class PaymentServiceImplTest {
 				return null;
 			}
 		}).when(paymentValidatorMock).validate(Mockito.any(Payment.class), Mockito.any(List.class));
-		// when
 
-		// then
-		try{
+		try {
+			// when
 			paymentServiceImpl.processPayment(new Payment());
-		
-		}
-		catch (ValidatorException e){
+
+		} catch (ValidatorException e) {
+			// then
 			Mockito.verify(paymentProcessorMock, Mockito.times(0)).processPayment(Mockito.any(Payment.class));
 		}
-	
+
 	}
 
 }
